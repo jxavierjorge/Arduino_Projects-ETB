@@ -1,15 +1,23 @@
 const int ledPin = 5;
-const int analogPin = 0;
-
-int val = 0;
+int valor = 0;
+float pwm = 0;
 
 void setup()
 {
+  Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
 }
 
 void loop()
 {
-  val = analogRead(analogPin);
-  analogWrite(ledPin, val/7);
+  valor = analogRead(A0);
+  
+  pwm = map(valor, 0, 1023, 0, 255);
+  
+  Serial.print("Valor lido do potenciometro : ");
+  Serial.print(valor);
+  Serial.print("	= PWM : ");
+  Serial.println(pwm);
+  
+  analogWrite(5, pwm); 
 }
